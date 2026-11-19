@@ -28,4 +28,4 @@ Documentação: `docs/superpowers/specs/` e `docs/superpowers/plans/`.
 
 ## Licença
 
-Código: MIT. Conteúdo: CC BY-SA 4.0.
+Código: [MIT](LICENSE). Conteúdo: [CC BY-SA 4.0](LICENSE-content).
