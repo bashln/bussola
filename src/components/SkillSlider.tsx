@@ -5,13 +5,14 @@ import { useState } from "react";
 interface Props {
   skillSlug: string;
   nome: string;
+  baseline: number;
   nivel: number;
   meta: number;
   logado: boolean;
 }
 
-export function SkillSlider({ skillSlug, nome, nivel, meta, logado }: Props) {
-  const [baseline, setBaseline] = useState(nivel);
+export function SkillSlider({ skillSlug, nome, baseline: baselineInicial, nivel, meta, logado }: Props) {
+  const [baseline, setBaseline] = useState(baselineInicial);
   const [alvo, setAlvo] = useState(meta);
   const [mensagem, setMensagem] = useState<string | null>(null);
 

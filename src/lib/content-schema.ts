@@ -20,9 +20,12 @@ const videoSchema = z.object({
 const docSchema = z.object({
   tipo: z.literal("doc"),
   titulo: z.string().min(1),
-  url: z.string().url("Informe uma URL válida."),
+  url: z
+    .string()
+    .url("Informe uma URL válida.")
+    .refine((url) => /^https?:\/\//i.test(url), "Só links http(s) são permitidos."),
   resumo: z.string().optional(),
-  ancora: z.string().optional(),
+  ancora: z.string().regex(/^#/, "Âncora deve começar com #.").optional(),
 });
 
 export const lessonSchema = z.object({

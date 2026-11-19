@@ -17,6 +17,13 @@ function criarBanco(): Database {
 }
 
 export function getDb(): Database {
-  if (!instancia) instancia = criarBanco();
+  if (!instancia) {
+    if (usandoMemoria && process.env.NODE_ENV === "production") {
+      throw new Error(
+        "DATABASE_URL é obrigatório em produção: o banco em memória não persiste dados.",
+      );
+    }
+    instancia = criarBanco();
+  }
   return instancia;
 }

@@ -7,7 +7,7 @@ export const metadata = { title: "Minha matriz" };
 
 export default async function SkillsPage() {
   const userId = await getSessionUserId();
-  const { niveis, logado } = await carregarQuadro(userId);
+  const { niveis, baselines, logado } = await carregarQuadro(userId);
 
   return (
     <div>
@@ -31,6 +31,7 @@ export default async function SkillsPage() {
                 key={skill.slug}
                 skillSlug={skill.slug}
                 nome={skill.nome}
+                baseline={baselines[skill.slug] ?? 0}
                 nivel={skill.nivel}
                 meta={skill.meta}
                 logado={logado}

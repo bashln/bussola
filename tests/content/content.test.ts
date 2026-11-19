@@ -19,6 +19,11 @@ describe("schema de conteúdo", () => {
     expect(() => parseLessonFrontmatter(data)).toThrow();
   });
 
+  it("rejeita documento com esquema que não é http(s)", () => {
+    const data = fixtureData("doc-perigoso.mdx");
+    expect(() => parseLessonFrontmatter(data)).toThrow();
+  });
+
   it("rejeita skill com menos de cinco limiares", () => {
     expect(() =>
       parseSkill({
