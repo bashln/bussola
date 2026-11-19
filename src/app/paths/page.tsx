@@ -6,16 +6,39 @@ export const metadata = { title: "Trilhas" };
 export default function PathsPage() {
   const paths = getPaths();
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Trilhas</h1>
-      <p className="mt-2 text-gray-700">Comece pelos fundamentos e siga em frente.</p>
-      <ul className="mt-8 space-y-4">
-        {paths.map((path) => (
-          <li key={path.slug} className="rounded-lg border p-5">
-            <h2 className="text-xl font-semibold">{path.titulo}</h2>
-            <p className="mt-2 text-gray-700">{path.descricao}</p>
-            <Link className="mt-3 inline-block text-blue-700 underline" href={`/paths/${path.slug}`}>
-              Ver trilha
+    <div className="space-y-8">
+      <div className="border-b border-slate-200 pb-6">
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">Trilhas</h1>
+        <p className="mt-2 max-w-2xl text-base text-slate-600">
+          Comece pelos fundamentos e avance passo a passo por cursos e projetos práticos.
+        </p>
+      </div>
+
+      <ul className="grid gap-5 md:grid-cols-2">
+        {paths.map((path, index) => (
+          <li key={path.slug}>
+            <Link
+              href={`/paths/${path.slug}`}
+              className="group flex h-full flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all hover:border-blue-300 hover:shadow-md"
+            >
+              <div>
+                <div className="flex items-center justify-between">
+                  <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-700">
+                    Trilha {index + 1}
+                  </span>
+                  <span className="text-sm font-medium text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-blue-600">
+                    →
+                  </span>
+                </div>
+                <h2 className="mt-4 text-xl font-bold text-slate-900 group-hover:text-blue-700">
+                  {path.titulo}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{path.descricao}</p>
+              </div>
+
+              <span className="mt-6 inline-flex items-center text-sm font-semibold text-blue-600">
+                Ver trilha
+              </span>
             </Link>
           </li>
         ))}

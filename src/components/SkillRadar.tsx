@@ -30,7 +30,7 @@ export function SkillRadar({ dados }: { dados: RadarSkill[] }) {
     <svg
       viewBox="0 0 400 400"
       preserveAspectRatio="xMidYMid meet"
-      className="max-w-full"
+      className="mx-auto max-w-full"
       role="img"
       aria-label="Radar de competências"
     >
@@ -39,21 +39,22 @@ export function SkillRadar({ dados }: { dados: RadarSkill[] }) {
           key={nivel}
           points={poligono(total, nivel / 5)}
           fill="none"
-          stroke="#d1d5db"
+          stroke={nivel === 5 ? "#cbd5e1" : "#e2e8f0"}
           strokeWidth="1"
         />
       ))}
 
       {dados.map((skill, indice) => {
-        const p = ponto(indice, total, skill.nivel / 5);
+        const p = ponto(indice, total, 1);
         return (
-          <circle
-            key={skill.slug}
-            data-testid={`vertice-${skill.slug}`}
-            cx={p.x}
-            cy={p.y}
-            r={Math.max(1, skill.nivel * 3)}
-            fill="#1d4ed8"
+          <line
+            key={`axis-${skill.slug}`}
+            x1={CENTRO}
+            y1={CENTRO}
+            x2={p.x}
+            y2={p.y}
+            stroke="#e2e8f0"
+            strokeWidth="1"
           />
         );
       })}
@@ -65,10 +66,27 @@ export function SkillRadar({ dados }: { dados: RadarSkill[] }) {
             return `${p.x.toFixed(1)},${p.y.toFixed(1)}`;
           })
           .join(" ")}
-        fill="rgba(29, 78, 216, 0.15)"
-        stroke="#1d4ed8"
-        strokeWidth="2"
+        fill="rgba(37, 99, 235, 0.16)"
+        stroke="#2563eb"
+        strokeWidth="2.25"
+        strokeLinejoin="round"
       />
+
+      {dados.map((skill, indice) => {
+        const p = ponto(indice, total, skill.nivel / 5);
+        return (
+          <circle
+            key={skill.slug}
+            data-testid={`vertice-${skill.slug}`}
+            cx={p.x}
+            cy={p.y}
+            r={Math.max(2.5, skill.nivel * 2.5)}
+            fill="#2563eb"
+            stroke="#ffffff"
+            strokeWidth="1.5"
+          />
+        );
+      })}
     </svg>
   );
 }
