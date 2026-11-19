@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface Props {
@@ -15,22 +16,33 @@ export function SkillSlider({ skillSlug, nome, baseline: baselineInicial, nivel,
   const [baseline, setBaseline] = useState(baselineInicial);
   const [alvo, setAlvo] = useState(meta);
   const [mensagem, setMensagem] = useState<string | null>(null);
+  const [salvando, setSalvando] = useState(false);
+  const router = useRouter();
 
   if (!logado) {
     return <p className="text-sm text-gray-600">{nome}: nível {nivel} · meta {meta}</p>;
   }
 
   async function salvar(campo: "baseline" | "meta", valor: number) {
-    const resposta = await fetch(`/api/${campo}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(
-        campo === "baseline"
-          ? { skillSlug, nivel: valor }
-          : { skillSlug, nivelAlvo: valor },
-      ),
-    });
-    setMensagem(resposta.ok ? null : "Não foi possível salvar.");
+    setSalvando(true);
+    setMensagem(null);
+    try {
+      const resposta = await fetch(`/api/${campo}`, {
+        method: "PUT",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(
+          campo === "baseline"
+            ? { skillSlug, nivel: valor }
+            : { skillSlug, nivelAlvo: valor },
+        ),
+      });
+      if (resposta.ok) router.refresh();
+      else setMensagem("Não foi possível salvar.");
+    } catch {
+      setMensagem("Não foi possível salvar.");
+    } finally {
+      setSalvando(false);
+    }
   }
 
   return (
@@ -43,6 +55,7 @@ export function SkillSlider({ skillSlug, nome, baseline: baselineInicial, nivel,
           min={0}
           max={5}
           value={baseline}
+          disabled={salvando}
           onChange={(evento) => setBaseline(Number(evento.target.value))}
           onPointerUp={(evento) =>
             salvar("baseline", Number((evento.target as HTMLInputElement).value))
@@ -61,6 +74,7 @@ export function SkillSlider({ skillSlug, nome, baseline: baselineInicial, nivel,
           min={1}
           max={5}
           value={alvo}
+          disabled={salvando}
           onChange={(evento) => setAlvo(Number(evento.target.value))}
           onPointerUp={(evento) =>
             salvar("meta", Number((evento.target as HTMLInputElement).value))
