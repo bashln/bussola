@@ -20,6 +20,30 @@ export default function ContribuirPage() {
         <li>Rode <code>npm run test</code> e abra o PR.</li>
       </ol>
 
+      <h2 id="apoiar" className="mt-8 text-xl font-semibold">Apoiar financeiramente</h2>
+      <p className="mt-2 text-gray-700">
+        O Bússola é 100% gratuito, sem anúncios e sem venda de dados. Se o projeto te ajudou e
+        você quiser contribuir financeiramente para mantê-lo no ar, escolha uma das opções abaixo:
+      </p>
+      <div className="mt-4 flex flex-wrap gap-3">
+        <a
+          href="https://github.com/sponsors/bashln"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-900 shadow-xs transition-colors hover:bg-slate-50"
+        >
+          GitHub Sponsors
+        </a>
+        <a
+          href="https://www.buymeacoffee.com/bashln"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-lg bg-amber-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-xs transition-colors hover:bg-amber-300"
+        >
+          Buy Me a Coffee
+        </a>
+      </div>
+
       <h2 className="mt-8 text-xl font-semibold">Licença</h2>
       <p className="mt-2 text-gray-700">Código sob MIT; conteúdo sob CC BY-SA 4.0.</p>
     </div>

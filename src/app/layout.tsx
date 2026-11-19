@@ -51,6 +51,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <Link href="/contribuir" className="transition-colors hover:text-slate-900">
                 Contribuir
               </Link>
+              <Link href="/contribuir#apoiar" className="transition-colors hover:text-slate-900">
+                Apoiar
+              </Link>
             </div>
           </div>
         </footer>
