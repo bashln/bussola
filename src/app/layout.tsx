@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import Link from "next/link";
+import { BrandLogo } from "@/components/BrandLogo";
 import { Header } from "@/components/Header";
 import "./globals.css";
 
@@ -29,18 +30,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6 lg:px-8">
           {children}
         </main>
-        <footer className="border-t border-slate-200/80 bg-white/60 py-6 text-sm text-slate-500">
-          <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 sm:flex-row sm:px-6 lg:px-8">
-            <p>
-              <span className="font-semibold text-slate-700">Bússola</span> — Currículo gratuito e
-              open-source de desenvolvimento web.
-            </p>
-            <div className="flex items-center gap-4">
+        <footer className="border-t border-slate-200/80 bg-white py-8 text-sm text-slate-600">
+          <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 sm:flex-row sm:items-center sm:px-6 lg:px-8">
+            <div className="space-y-1.5">
+              <BrandLogo size="sm" />
+              <p className="text-xs text-slate-500">
+                Currículo e plataforma de competências 100% gratuitos, sem paywall e open-source.
+              </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-5 font-medium">
               <Link href="/paths" className="transition-colors hover:text-slate-900">
                 Trilhas
               </Link>
               <Link href="/skills" className="transition-colors hover:text-slate-900">
                 Matriz
+              </Link>
+              <Link href="/dashboard" className="transition-colors hover:text-slate-900">
+                Painel
               </Link>
               <Link href="/contribuir" className="transition-colors hover:text-slate-900">
                 Contribuir
