@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: hardskills
+      POSTGRES_USER: hardskills
+      POSTGRES_PASSWORD: hardskills
+    ports:
+      - "5432:5432"
+    volumes:
+      - hardskills-db:/var/lib/postgresql/data
+
+volumes:
+  hardskills-db:
