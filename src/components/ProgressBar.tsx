@@ -6,9 +6,12 @@ export function ProgressBar({ atual, total }: { atual: number; total: number }) 
       aria-valuenow={percentual}
       aria-valuemin={0}
       aria-valuemax={100}
-      className="h-2 w-full rounded bg-gray-200"
+      className="h-2.5 w-full overflow-hidden rounded-full bg-slate-100"
     >
-      <div className="h-2 rounded bg-blue-700" style={{ width: `${percentual}%` }} />
+      <div
+        className="h-full rounded-full bg-gradient-to-r from-blue-600 to-emerald-500 transition-all duration-300"
+        style={{ width: `${percentual}%` }}
+      />
     </div>
   );
 }

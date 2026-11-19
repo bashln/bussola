@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { getSessionUserId } from "@/lib/auth";
 import { carregarQuadro } from "@/lib/progresso";
 import { SkillRadar } from "@/components/SkillRadar";
@@ -10,21 +11,40 @@ export default async function SkillsPage() {
   const { niveis, baselines, logado } = await carregarQuadro(userId);
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold">Minha matriz de competências</h1>
-      {!logado && (
-        <p className="mt-3 rounded bg-gray-100 p-3">
-          Você está vendo uma matriz vazia. <a className="underline" href="/login">Entre</a> para
-          salvar seu progresso e ajustar seu nível.
+    <div className="space-y-8">
+      <div className="border-b border-slate-200 pb-6">
+        <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
+          Minha matriz de competências
+        </h1>
+        <p className="mt-2 max-w-2xl text-base text-slate-600">
+          Visualize seu equilíbrio técnico no radar e ajuste seu nível base ou meta em cada
+          competência.
         </p>
+      </div>
+
+      {!logado && (
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-900">
+          <p>
+            Você está vendo uma matriz vazia. Entre para salvar seu progresso e ajustar seu nível.
+          </p>
+          <Link
+            href="/login"
+            className="rounded-lg bg-amber-900 px-3.5 py-1.5 font-semibold text-white transition-colors hover:bg-amber-800"
+          >
+            Entrar
+          </Link>
+        </div>
       )}
 
-      <div className="mt-8 grid gap-8 md:grid-cols-2">
-        <div>
-          <SkillRadar dados={niveis} />
+      <div className="grid gap-8 lg:grid-cols-12">
+        <div className="lg:col-span-5">
+          <div className="sticky top-24 rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
+            <h2 className="mb-4 text-lg font-bold text-slate-900">Radar de competências</h2>
+            <SkillRadar dados={niveis} />
+          </div>
         </div>
-        <div>
-          <h2 className="mb-3 text-xl font-semibold">Níveis e metas</h2>
+        <div className="lg:col-span-7">
+          <h2 className="mb-4 text-lg font-bold text-slate-900">Níveis e metas</h2>
           <ul className="space-y-3">
             {niveis.map((skill) => (
               <SkillSlider

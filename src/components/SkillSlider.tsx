@@ -12,7 +12,14 @@ interface Props {
   logado: boolean;
 }
 
-export function SkillSlider({ skillSlug, nome, baseline: baselineInicial, nivel, meta, logado }: Props) {
+export function SkillSlider({
+  skillSlug,
+  nome,
+  baseline: baselineInicial,
+  nivel,
+  meta,
+  logado,
+}: Props) {
   const [baseline, setBaseline] = useState(baselineInicial);
   const [alvo, setAlvo] = useState(meta);
   const [mensagem, setMensagem] = useState<string | null>(null);
@@ -20,7 +27,14 @@ export function SkillSlider({ skillSlug, nome, baseline: baselineInicial, nivel,
   const router = useRouter();
 
   if (!logado) {
-    return <p className="text-sm text-gray-600">{nome}: nível {nivel} · meta {meta}</p>;
+    return (
+      <li className="flex items-center justify-between rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm shadow-xs">
+        <span className="font-medium text-slate-800">{nome}</span>
+        <span className="font-mono text-xs text-slate-500">
+          nível {nivel} · meta {meta}
+        </span>
+      </li>
+    );
   }
 
   async function salvar(campo: "baseline" | "meta", valor: number) {
@@ -46,47 +60,65 @@ export function SkillSlider({ skillSlug, nome, baseline: baselineInicial, nivel,
   }
 
   return (
-    <li className="rounded border p-3">
-      <p className="font-medium">{nome}</p>
-      <label className="mt-2 block text-sm">
-        Nível atual (conhecimento prévio)
-        <input
-          type="range"
-          min={0}
-          max={5}
-          value={baseline}
-          disabled={salvando}
-          onChange={(evento) => setBaseline(Number(evento.target.value))}
-          onPointerUp={(evento) =>
-            salvar("baseline", Number((evento.target as HTMLInputElement).value))
-          }
-          onKeyUp={(evento) =>
-            salvar("baseline", Number((evento.target as HTMLInputElement).value))
-          }
-          className="ml-2 w-full max-w-48"
-        />
-        <span className="ml-2">{baseline}</span>
-      </label>
-      <label className="mt-1 block text-sm">
-        Meta
-        <input
-          type="range"
-          min={1}
-          max={5}
-          value={alvo}
-          disabled={salvando}
-          onChange={(evento) => setAlvo(Number(evento.target.value))}
-          onPointerUp={(evento) =>
-            salvar("meta", Number((evento.target as HTMLInputElement).value))
-          }
-          onKeyUp={(evento) =>
-            salvar("meta", Number((evento.target as HTMLInputElement).value))
-          }
-          className="ml-2 w-full max-w-48"
-        />
-        <span className="ml-2">{alvo}</span>
-      </label>
-      {mensagem && <p role="alert" className="text-sm text-red-700">{mensagem}</p>}
+    <li className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs transition-shadow hover:shadow-sm">
+      <div className="flex items-center justify-between gap-2">
+        <p className="font-semibold text-slate-900">{nome}</p>
+        <span className="rounded-full bg-slate-100 px-2.5 py-0.5 font-mono text-xs font-medium text-slate-700">
+          nível {nivel} / meta {alvo}
+        </span>
+      </div>
+
+      <div className="mt-3 grid gap-3 sm:grid-cols-2">
+        <label className="block text-xs font-medium text-slate-600">
+          <span className="flex items-center justify-between">
+            <span>Nível atual (conhecimento prévio)</span>
+            <span className="font-mono font-semibold text-slate-900">{baseline}</span>
+          </span>
+          <input
+            type="range"
+            min={0}
+            max={5}
+            value={baseline}
+            disabled={salvando}
+            onChange={(evento) => setBaseline(Number(evento.target.value))}
+            onPointerUp={(evento) =>
+              salvar("baseline", Number((evento.target as HTMLInputElement).value))
+            }
+            onKeyUp={(evento) =>
+              salvar("baseline", Number((evento.target as HTMLInputElement).value))
+            }
+            className="mt-1.5 h-1.5 w-full cursor-pointer accent-blue-600"
+          />
+        </label>
+
+        <label className="block text-xs font-medium text-slate-600">
+          <span className="flex items-center justify-between">
+            <span>Meta</span>
+            <span className="font-mono font-semibold text-slate-900">{alvo}</span>
+          </span>
+          <input
+            type="range"
+            min={1}
+            max={5}
+            value={alvo}
+            disabled={salvando}
+            onChange={(evento) => setAlvo(Number(evento.target.value))}
+            onPointerUp={(evento) =>
+              salvar("meta", Number((evento.target as HTMLInputElement).value))
+            }
+            onKeyUp={(evento) =>
+              salvar("meta", Number((evento.target as HTMLInputElement).value))
+            }
+            className="mt-1.5 h-1.5 w-full cursor-pointer accent-emerald-600"
+          />
+        </label>
+      </div>
+
+      {mensagem && (
+        <p role="alert" className="mt-2 text-xs font-medium text-red-600">
+          {mensagem}
+        </p>
+      )}
     </li>
   );
 }
