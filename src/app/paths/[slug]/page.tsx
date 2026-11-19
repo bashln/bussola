@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCourses, getPath } from "@/lib/content";
+import { getCourses, getPath, getPaths } from "@/lib/content";
 
 export function generateStaticParams() {
-  return [{ slug: "foundations" }, { slug: "full-stack-node" }];
+  return getPaths().map((path) => ({ slug: path.slug }));
 }
 
 export default async function PathPage({ params }: { params: Promise<{ slug: string }> }) {
