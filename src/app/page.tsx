@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="space-y-10">
       <section className="rounded-xl bg-gray-50 p-8">
-        <h1 className="text-3xl font-bold">Aprenda web dev e acompanhe suas hardskills</h1>
+        <h1 className="text-3xl font-bold">Aprenda web dev e acompanhe suas competências</h1>
         <p className="mt-4 max-w-2xl text-gray-700">
           Currículo gratuito e open-source, organizado por trilhas e ligado a uma matriz de
           competências. Estude, construa projetos e veja seu progresso virar nível.

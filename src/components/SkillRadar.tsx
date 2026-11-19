@@ -32,7 +32,7 @@ export function SkillRadar({ dados }: { dados: RadarSkill[] }) {
       preserveAspectRatio="xMidYMid meet"
       className="max-w-full"
       role="img"
-      aria-label="Radar de hardskills"
+      aria-label="Radar de competências"
     >
       {[1, 2, 3, 4, 5].map((nivel) => (
         <polygon

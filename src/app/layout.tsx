@@ -3,8 +3,8 @@ import { Header } from "@/components/Header";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: { default: "Hardskills", template: "%s | Hardskills" },
-  description: "Aprenda desenvolvimento web de graça e acompanhe suas hardskills.",
+  title: { default: "Bússola", template: "%s | Bússola" },
+  description: "Aprenda desenvolvimento web de graça e acompanhe suas competências.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

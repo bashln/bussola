@@ -11,7 +11,7 @@ export default async function SkillsPage() {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">Minha matriz de hardskills</h1>
+      <h1 className="text-3xl font-bold">Minha matriz de competências</h1>
       {!logado && (
         <p className="mt-3 rounded bg-gray-100 p-3">
           Você está vendo uma matriz vazia. <a className="underline" href="/login">Entre</a> para

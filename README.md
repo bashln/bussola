@@ -1,6 +1,6 @@
-# Hardskills
+# Bússola
 
-Site gratuito e open-source para aprender desenvolvimento web, com currículo estilo The Odin Project ligado a uma matriz de hardskills.
+Site gratuito e open-source para aprender desenvolvimento web, com currículo estilo The Odin Project ligado a uma matriz de competências (hardskills).
 
 - Conteúdo e interface em PT-BR.
 - Desktop e mobile.
