@@ -1,6 +1,21 @@
 import { eq } from "drizzle-orm";
 import { db } from "./client";
-import { baselines, metas, progresso } from "./schema";
+import { baselines, metas, progresso, users } from "./schema";
+
+export async function ensureUser(
+  id: string,
+  githubId: string,
+  usuario: string,
+  avatarUrl: string | null,
+): Promise<void> {
+  await db
+    .insert(users)
+    .values({ id, githubId, usuario, avatarUrl })
+    .onConflictDoUpdate({
+      target: users.id,
+      set: { githubId, usuario, avatarUrl },
+    });
+}
 
 export async function saveProgress(userId: string, lessonSlug: string): Promise<void> {
   await db.insert(progresso).values({ userId, lessonSlug }).onConflictDoNothing();
