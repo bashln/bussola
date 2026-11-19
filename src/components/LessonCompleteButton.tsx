@@ -1,14 +1,17 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface Props {
   lessonSlug: string;
   logado: boolean;
+  concluidoInicial: boolean;
 }
 
-export function LessonCompleteButton({ lessonSlug, logado }: Props) {
-  const [concluido, setConcluido] = useState(false);
+export function LessonCompleteButton({ lessonSlug, logado, concluidoInicial }: Props) {
+  const router = useRouter();
+  const [concluido, setConcluido] = useState(concluidoInicial);
   const [erro, setErro] = useState<string | null>(null);
 
   if (!logado) {
@@ -33,7 +36,10 @@ export function LessonCompleteButton({ lessonSlug, logado }: Props) {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ lessonSlug }),
     });
-    if (resposta.ok) setConcluido(true);
+    if (resposta.ok) {
+      setConcluido(true);
+      router.refresh();
+    }
     else setErro("Não foi possível salvar. Tente novamente.");
   }
 

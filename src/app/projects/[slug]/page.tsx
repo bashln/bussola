@@ -4,6 +4,7 @@ import { LessonCompleteButton } from "@/components/LessonCompleteButton";
 import { StudySessionPanel } from "@/components/StudySessionPanel";
 import { getSessionUserId } from "@/lib/auth";
 import { getLesson } from "@/lib/content";
+import { listDoneLessonIds } from "@/lib/db/repositories";
 import { skills } from "@/lib/skills";
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -12,6 +13,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   if (!projeto || projeto.tipo !== "projeto") notFound();
 
   const userId = await getSessionUserId();
+  const concluidas = userId ? await listDoneLessonIds(userId) : new Set<string>();
   const desenvolvimento = Object.keys(projeto.skillWeights)
     .map((id) => skills.find((skill) => skill.id === id)?.nome ?? id);
 
@@ -30,7 +32,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </section>
 
       <StudySessionPanel recursos={projeto.recursos} />
-      <LessonCompleteButton lessonSlug={projeto.slug} logado={Boolean(userId)} />
+      <LessonCompleteButton
+        lessonSlug={projeto.slug}
+        logado={Boolean(userId)}
+        concluidoInicial={concluidas.has(projeto.slug)}
+      />
     </article>
   );
 }

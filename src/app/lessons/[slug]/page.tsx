@@ -4,6 +4,7 @@ import { LessonCompleteButton } from "@/components/LessonCompleteButton";
 import { StudySessionPanel } from "@/components/StudySessionPanel";
 import { getSessionUserId } from "@/lib/auth";
 import { getLesson } from "@/lib/content";
+import { listDoneLessonIds } from "@/lib/db/repositories";
 import { skills } from "@/lib/skills";
 
 export default async function LessonPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -12,6 +13,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   if (!licao || licao.tipo !== "leitura") notFound();
 
   const userId = await getSessionUserId();
+  const concluidas = userId ? await listDoneLessonIds(userId) : new Set<string>();
   const desenvolvimento = Object.keys(licao.skillWeights)
     .map((id) => skills.find((skill) => skill.id === id)?.nome ?? id);
 
@@ -30,7 +32,11 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
       </section>
 
       <StudySessionPanel recursos={licao.recursos} />
-      <LessonCompleteButton lessonSlug={licao.slug} logado={Boolean(userId)} />
+      <LessonCompleteButton
+        lessonSlug={licao.slug}
+        logado={Boolean(userId)}
+        concluidoInicial={concluidas.has(licao.slug)}
+      />
     </article>
   );
 }
