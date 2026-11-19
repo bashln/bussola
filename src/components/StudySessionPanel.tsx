@@ -2,13 +2,7 @@
 
 import { useState } from "react";
 import type { Recurso } from "@/lib/types";
-
-function youtubeId(url: string): string | null {
-  const match = url.match(
-    /(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/,
-  );
-  return match?.[1] ?? null;
-}
+import { youtubeId } from "@/lib/youtube";
 
 export function StudySessionPanel({ recursos }: { recursos: Recurso[] }) {
   const [carregados, setCarregados] = useState<Set<string>>(new Set());

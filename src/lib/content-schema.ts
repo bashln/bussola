@@ -1,13 +1,11 @@
 import { z } from "zod";
 import type { LessonMeta, PathMeta, Skill } from "./types";
+import { youtubeId } from "./youtube";
 
 const youtubeUrl = z
   .string()
   .url("Informe uma URL válida.")
-  .refine(
-    (url) => /(youtube\.com\/(watch\?v=|embed\/)|youtu\.be\/)[A-Za-z0-9_-]{6,}/.test(url),
-    "Vídeos devem ser do YouTube.",
-  );
+  .refine((url) => youtubeId(url) !== null, "Vídeos devem ser do YouTube.");
 
 const videoSchema = z.object({
   tipo: z.literal("video"),
