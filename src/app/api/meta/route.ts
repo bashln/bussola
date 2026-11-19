@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getSessionUserId } from "@/lib/auth";
 import { setMeta } from "@/lib/db/repositories";
+import { skillConhecida } from "@/lib/skills";
 
 const corpoSchema = z.object({
   skillSlug: z.string().min(1),
@@ -17,6 +18,10 @@ export async function PUT(request: Request) {
   const corpo = corpoSchema.safeParse(await request.json().catch(() => null));
   if (!corpo.success) {
     return NextResponse.json({ erro: "Meta deve ser um número entre 1 e 5." }, { status: 400 });
+  }
+
+  if (!skillConhecida(corpo.data.skillSlug)) {
+    return NextResponse.json({ erro: "Skill não encontrada." }, { status: 400 });
   }
 
   await setMeta(userId, corpo.data.skillSlug, corpo.data.nivelAlvo);

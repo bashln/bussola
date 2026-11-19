@@ -24,3 +24,7 @@ const sementes: Array<Omit<Skill, "limiares">> = [
 ];
 
 export const skills: Skill[] = sementes.map((skill) => parseSkill({ ...skill, limiares }));
+
+export function skillConhecida(slug: string): boolean {
+  return skills.some((skill) => skill.slug === slug);
+}

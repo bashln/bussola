@@ -60,6 +60,16 @@ describe("rotas de API", () => {
     expect(resposta.status).toBe(400);
   });
 
+  it("PUT /api/baseline com skill desconhecida retorna 400", async () => {
+    const resposta = await rotas.baseline(request({ skillSlug: "inexistente", nivel: 3 }));
+    expect(resposta.status).toBe(400);
+  });
+
+  it("PUT /api/meta com skill desconhecida retorna 400", async () => {
+    const resposta = await rotas.meta(request({ skillSlug: "inexistente", nivelAlvo: 3 }));
+    expect(resposta.status).toBe(400);
+  });
+
   it("PUT /api/meta com nivelAlvo fora de 1..5 retorna 400", async () => {
     const resposta = await rotas.meta(request({ skillSlug: "nodejs", nivelAlvo: 0 }));
     expect(resposta.status).toBe(400);
