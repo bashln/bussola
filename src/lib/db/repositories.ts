@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { db } from "./client";
+import { getDb } from "./client";
 import { baselines, metas, progresso, users } from "./schema";
 
 export async function ensureUser(
@@ -8,7 +8,7 @@ export async function ensureUser(
   usuario: string,
   avatarUrl: string | null,
 ): Promise<void> {
-  await db
+  await getDb()
     .insert(users)
     .values({ id, githubId, usuario, avatarUrl })
     .onConflictDoUpdate({
@@ -18,11 +18,11 @@ export async function ensureUser(
 }
 
 export async function saveProgress(userId: string, lessonSlug: string): Promise<void> {
-  await db.insert(progresso).values({ userId, lessonSlug }).onConflictDoNothing();
+  await getDb().insert(progresso).values({ userId, lessonSlug }).onConflictDoNothing();
 }
 
 export async function listDoneLessonIds(userId: string): Promise<Set<string>> {
-  const linhas = await db
+  const linhas = await getDb()
     .select({ lessonSlug: progresso.lessonSlug })
     .from(progresso)
     .where(eq(progresso.userId, userId));
@@ -30,12 +30,12 @@ export async function listDoneLessonIds(userId: string): Promise<Set<string>> {
 }
 
 export async function getBaselines(userId: string): Promise<Record<string, number>> {
-  const linhas = await db.select().from(baselines).where(eq(baselines.userId, userId));
+  const linhas = await getDb().select().from(baselines).where(eq(baselines.userId, userId));
   return Object.fromEntries(linhas.map((linha) => [linha.skillSlug, linha.nivel]));
 }
 
 export async function setBaseline(userId: string, skillSlug: string, nivel: number): Promise<void> {
-  await db
+  await getDb()
     .insert(baselines)
     .values({ userId, skillSlug, nivel })
     .onConflictDoUpdate({
@@ -45,12 +45,12 @@ export async function setBaseline(userId: string, skillSlug: string, nivel: numb
 }
 
 export async function getMetas(userId: string): Promise<Record<string, number>> {
-  const linhas = await db.select().from(metas).where(eq(metas.userId, userId));
+  const linhas = await getDb().select().from(metas).where(eq(metas.userId, userId));
   return Object.fromEntries(linhas.map((linha) => [linha.skillSlug, linha.nivelAlvo]));
 }
 
 export async function setMeta(userId: string, skillSlug: string, nivelAlvo: number): Promise<void> {
-  await db
+  await getDb()
     .insert(metas)
     .values({ userId, skillSlug, nivelAlvo })
     .onConflictDoUpdate({

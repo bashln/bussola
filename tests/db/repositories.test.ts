@@ -6,9 +6,9 @@ type Repositorios = typeof import("@/lib/db/repositories");
 let repositorios: Repositorios;
 
 beforeAll(async () => {
-  const { db } = await import("@/lib/db/client");
+  const { getDb } = await import("@/lib/db/client");
   const { migrate } = await import("drizzle-orm/pglite/migrator");
-  await migrate(db as never, { migrationsFolder: "drizzle" });
+  await migrate(getDb() as never, { migrationsFolder: "drizzle" });
   repositorios = await import("@/lib/db/repositories");
 });
 

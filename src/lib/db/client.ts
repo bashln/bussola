@@ -9,6 +9,14 @@ type Database = PgliteDatabase<typeof schema>;
 const url = process.env.DATABASE_URL ?? "";
 export const usandoMemoria = url === "" || url.startsWith("pglite://");
 
-export const db: Database = usandoMemoria
-  ? drizzlePglite(new PGlite(), { schema })
-  : (drizzlePostgres(postgres(url), { schema }) as unknown as Database);
+let instancia: Database | null = null;
+
+function criarBanco(): Database {
+  if (usandoMemoria) return drizzlePglite(new PGlite(), { schema });
+  return drizzlePostgres(postgres(url), { schema }) as unknown as Database;
+}
+
+export function getDb(): Database {
+  if (!instancia) instancia = criarBanco();
+  return instancia;
+}
