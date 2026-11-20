@@ -38,8 +38,11 @@ export function SkillRadar({ dados }: { dados: RadarSkill[] }) {
         <polygon
           key={nivel}
           points={poligono(total, nivel / 5)}
-          fill="none"
-          stroke={nivel === 5 ? "#cbd5e1" : "#e2e8f0"}
+          className={
+            nivel === 5
+              ? "fill-none stroke-slate-300 dark:stroke-slate-600"
+              : "fill-none stroke-slate-200 dark:stroke-slate-700"
+          }
           strokeWidth="1"
         />
       ))}
@@ -53,7 +56,7 @@ export function SkillRadar({ dados }: { dados: RadarSkill[] }) {
             y1={CENTRO}
             x2={p.x}
             y2={p.y}
-            stroke="#e2e8f0"
+            className="stroke-slate-200 dark:stroke-slate-700"
             strokeWidth="1"
           />
         );
@@ -66,8 +69,7 @@ export function SkillRadar({ dados }: { dados: RadarSkill[] }) {
             return `${p.x.toFixed(1)},${p.y.toFixed(1)}`;
           })
           .join(" ")}
-        fill="rgba(37, 99, 235, 0.16)"
-        stroke="#2563eb"
+        className="fill-blue-500/15 stroke-blue-600 dark:fill-amber-400/15 dark:stroke-amber-400"
         strokeWidth="2.25"
         strokeLinejoin="round"
       />
@@ -81,8 +83,7 @@ export function SkillRadar({ dados }: { dados: RadarSkill[] }) {
             cx={p.x}
             cy={p.y}
             r={Math.max(2.5, skill.nivel * 2.5)}
-            fill="#2563eb"
-            stroke="#ffffff"
+            className="fill-blue-600 stroke-white dark:fill-amber-400 dark:stroke-slate-950"
             strokeWidth="1.5"
           />
         );
