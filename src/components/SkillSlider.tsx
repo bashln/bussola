@@ -53,8 +53,11 @@ export function SkillSlider({
             : { skillSlug, nivelAlvo: valor },
         ),
       });
-      if (resposta.ok) router.refresh();
-      else setMensagem("Não foi possível salvar.");
+      if (!resposta.ok) {
+        setMensagem("Não foi possível salvar.");
+        return;
+      }
+      router.refresh();
     } catch {
       setMensagem("Não foi possível salvar.");
     } finally {
@@ -87,12 +90,8 @@ export function SkillSlider({
             value={baseline}
             disabled={salvando}
             onChange={(evento) => setBaseline(Number(evento.target.value))}
-            onPointerUp={(evento) =>
-              salvar("baseline", Number((evento.target as HTMLInputElement).value))
-            }
-            onKeyUp={(evento) =>
-              salvar("baseline", Number((evento.target as HTMLInputElement).value))
-            }
+            onPointerUp={(evento) => salvar("baseline", Number(evento.currentTarget.value))}
+            onKeyUp={(evento) => salvar("baseline", Number(evento.currentTarget.value))}
             className="mt-1.5 h-1.5 w-full cursor-pointer accent-blue-600 dark:accent-amber-400"
           />
         </label>
@@ -109,12 +108,8 @@ export function SkillSlider({
             value={alvo}
             disabled={salvando}
             onChange={(evento) => setAlvo(Number(evento.target.value))}
-            onPointerUp={(evento) =>
-              salvar("meta", Number((evento.target as HTMLInputElement).value))
-            }
-            onKeyUp={(evento) =>
-              salvar("meta", Number((evento.target as HTMLInputElement).value))
-            }
+            onPointerUp={(evento) => salvar("meta", Number(evento.currentTarget.value))}
+            onKeyUp={(evento) => salvar("meta", Number(evento.currentTarget.value))}
             className="mt-1.5 h-1.5 w-full cursor-pointer accent-emerald-600"
           />
         </label>

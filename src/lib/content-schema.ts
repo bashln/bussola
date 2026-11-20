@@ -67,15 +67,15 @@ export const courseSchema = z.object({
 });
 
 export function parseLessonFrontmatter(data: unknown): LessonMeta {
-  return lessonSchema.parse(data) as LessonMeta;
+  return lessonSchema.parse(data);
 }
 
 export function parseSkill(data: unknown): Skill {
-  return skillSchema.parse(data) as Skill;
+  return skillSchema.parse(data);
 }
 
 export function parsePath(data: unknown): PathMeta {
-  return pathSchema.parse(data) as PathMeta;
+  return pathSchema.parse(data);
 }
 
 export function parseCourse(data: unknown) {
