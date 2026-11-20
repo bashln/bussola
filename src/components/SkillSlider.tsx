@@ -28,7 +28,10 @@ export function SkillSlider({
 
   if (!logado) {
     return (
-      <li className="flex items-center justify-between rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm shadow-xs dark:border-slate-800 dark:bg-[#111827]">
+      <li
+        id={skillSlug}
+        className="flex scroll-mt-24 items-center justify-between rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm shadow-xs dark:border-slate-800 dark:bg-[#111827]"
+      >
         <span className="font-medium text-slate-800 dark:text-slate-100">{nome}</span>
         <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
           nível {nivel} · meta {meta}
@@ -60,7 +63,10 @@ export function SkillSlider({
   }
 
   return (
-    <li className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs transition-shadow hover:shadow-sm dark:border-slate-800 dark:bg-[#111827]">
+    <li
+      id={skillSlug}
+      className="scroll-mt-24 rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs transition-shadow hover:shadow-sm dark:border-slate-800 dark:bg-[#111827]"
+    >
       <div className="flex items-center justify-between gap-2">
         <p className="font-semibold text-slate-900 dark:text-white">{nome}</p>
         <span className="rounded-full bg-slate-100 px-2.5 py-0.5 font-mono text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
