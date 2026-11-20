@@ -123,7 +123,7 @@ export function Header() {
                     className={`font-mono text-xs ${
                       isActive
                         ? "text-amber-300 dark:text-slate-900"
-                        : "text-slate-400 dark:text-slate-500"
+                        : "text-slate-500 dark:text-slate-400"
                     }`}
                   >
                     {link.code}

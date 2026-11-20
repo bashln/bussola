@@ -139,7 +139,7 @@ export default function Home() {
               className="flex flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all duration-150 hover:border-slate-300 hover:shadow-md dark:border-slate-800 dark:bg-[#111827] dark:hover:border-slate-700"
             >
               <div>
-                <span className="font-mono text-xs font-semibold text-slate-400 dark:text-slate-500">
+                <span className="font-mono text-xs font-semibold text-slate-500 dark:text-slate-400">
                   {pillar.code}
                 </span>
                 <h3 className="mt-2 text-lg font-bold text-slate-900 dark:text-white">
