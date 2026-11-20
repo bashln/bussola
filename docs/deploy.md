@@ -1,4 +1,4 @@
-# Deploy — Vercel + Neon
+# Deploy: Vercel + Neon
 
 Stack escolhida: Vercel Hobby (grátis para projeto pessoal não comercial) + Neon Free (1 GB, 100 CU-h/mês, scale-to-zero após 5 min).
 

@@ -5,7 +5,7 @@ Site gratuito e open-source para aprender desenvolvimento web, com currículo es
 - Conteúdo e interface em PT-BR.
 - Desktop e mobile.
 - Progresso salvo via login GitHub.
-- Conteúdo versionado em `content/` — contribuições via PR.
+- Conteúdo versionado em `content/`, com contribuições via PR.
 
 ## Rodar localmente
 
