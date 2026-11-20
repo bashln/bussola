@@ -94,7 +94,7 @@ export function Eli5QuickCheck({
           }`}
         >
           <span className="font-mono text-xs font-bold uppercase">
-            {isCorrect ? "✓ exato" : "quase lá"} —{" "}
+            {isCorrect ? "✓ exato" : "quase lá"}:{" "}
           </span>
           {explicacao}
         </div>

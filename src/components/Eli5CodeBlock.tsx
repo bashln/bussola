@@ -39,7 +39,7 @@ export function Eli5CodeBlock({ titulo, linguagem, codigo, oQueFaz }: Eli5CodeBl
                 : "border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:border-slate-600 dark:hover:text-white"
             }`}
           >
-            {copied ? "✓ copied" : "copiar"}
+            {copied ? "✓ copiado" : "copiar"}
           </button>
         </div>
       </div>

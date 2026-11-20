@@ -111,7 +111,7 @@ export default async function Eli5TopicPage({ params }: { params: Promise<{ slug
             href={`/eli5/${prevTopic.slug}`}
             className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition-colors hover:border-slate-300 hover:bg-slate-50 dark:border-slate-800 dark:bg-[#111827] dark:text-slate-300 dark:hover:border-slate-700 dark:hover:text-white"
           >
-            ← {prevTopic.titulo}
+            <span aria-hidden="true">←</span> {prevTopic.titulo}
           </Link>
         ) : (
           <span />
@@ -122,14 +122,14 @@ export default async function Eli5TopicPage({ params }: { params: Promise<{ slug
             href={`/eli5/${nextTopic.slug}`}
             className="rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 dark:bg-amber-400 dark:text-slate-950 dark:hover:bg-amber-300"
           >
-            Próximo: {nextTopic.titulo} →
+            Próximo: {nextTopic.titulo} <span aria-hidden="true">→</span>
           </Link>
         ) : (
           <Link
             href="/paths/foundations"
             className="rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 dark:bg-amber-400 dark:text-slate-950 dark:hover:bg-amber-300"
           >
-            Ir para a trilha Fundamentos →
+            Ir para a trilha Fundamentos <span aria-hidden="true">→</span>
           </Link>
         )}
       </nav>

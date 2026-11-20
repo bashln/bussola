@@ -46,7 +46,7 @@ export const eli5Topics: Eli5Topic[] = [
     analogia: {
       titulo: "Pense em uma receita de bolo",
       texto:
-        "Um computador é muito rápido, mas não adivinha nada. Se você der uma receita passo a passo bem clara — 'pegue 2 ovos, misture com farinha, asse por 30 minutos' — ele executa exatamente o que você pediu. Uma linguagem de programação é o idioma que usamos para escrever essas receitas.",
+        "Um computador é muito rápido, mas não adivinha nada. Se você der uma receita passo a passo bem clara, como 'pegue 2 ovos, misture com farinha, asse por 30 minutos', ele executa exatamente o que você pediu. Uma linguagem de programação é o idioma que usamos para escrever essas receitas.",
     },
     explicacao:
       "Por dentro, o computador só entende sinais elétricos (ligado e desligado, 1 e 0). Como escrever tudo em 0 e 1 seria impossível para humanos, criamos linguagens como JavaScript, Python e TypeScript. Elas usam palavras parecidas com inglês para que a gente escreva instruções, e um programa tradutor converte isso para a máquina.",
@@ -57,7 +57,7 @@ export const eli5Topics: Eli5Topic[] = [
       oQueFaz: "Guarda o texto 'Maria' e pede para o computador mostrar 'Olá, Maria!' na tela.",
     },
     porQueImporta:
-      "Você não precisa decorar todas as linguagens. Aprender a primeira é aprender a lógica de dar instruções claras — depois, as outras ficam muito mais fáceis.",
+      "Você não precisa decorar todas as linguagens. Aprender a primeira é aprender a lógica de dar instruções claras. Depois, as outras ficam muito mais fáceis.",
     check: {
       pergunta: "Para que serve uma linguagem de programação?",
       opcoes: [
@@ -108,7 +108,7 @@ export const eli5Topics: Eli5Topic[] = [
     analogia: {
       titulo: "Uma máquina de fazer suco",
       texto:
-        "Você coloca laranjas na entrada, aperta o botão e sai suco do outro lado. Não precisa montar a máquina toda vez que sentir sede — ela já está pronta. Uma função é exatamente isso: recebe ingredientes (parâmetros), faz um trabalho e devolve um resultado.",
+        "Você coloca laranjas na entrada, aperta o botão e sai suco do outro lado. Não precisa montar a máquina toda vez que sentir sede: ela já está pronta. Uma função é exatamente isso: recebe ingredientes (parâmetros), faz um trabalho e devolve um resultado.",
     },
     explicacao:
       "Em vez de copiar e colar as mesmas 10 linhas de código em vários lugares, você coloca essas linhas dentro de uma função com um nome (por exemplo, calcularDesconto). Sempre que precisar, basta 'chamar' a função pelo nome.",
@@ -152,7 +152,7 @@ export const eli5Topics: Eli5Topic[] = [
       oQueFaz: "Cria um título grande, um parágrafo de texto e um botão clicável.",
     },
     porQueImporta:
-      "Todo site que você já visitou na vida — do Google ao YouTube — usa HTML como base.",
+      "Todo site que você já visitou na vida, do Google ao YouTube, usa HTML como base.",
     check: {
       pergunta: "Qual é o papel do HTML em uma página web?",
       opcoes: [
@@ -258,7 +258,7 @@ export const eli5Topics: Eli5Topic[] = [
   {
     slug: "o-que-e-git",
     titulo: "O que é Git (e GitHub)?",
-    subtitulo: "A máquina do tempo do seu código — e como usar no dia a dia.",
+    subtitulo: "A máquina do tempo do seu código, e como usar no dia a dia.",
     categoria: "ferramentas",
     ordem: 8,
     tempoLeitura: "3 min",
@@ -294,7 +294,7 @@ export const eli5Topics: Eli5Topic[] = [
     analogia: {
       titulo: "Pedir no balcão em vez de procurar na prateleira",
       texto:
-        "Usar o mouse e clicar em pastas é como andar pelo mercado procurando um produto. Usar o terminal é chegar no balcão e dizer exatamente o que você quer em uma frase curta — é muito mais rápido depois que você aprende as palavras básicas.",
+        "Usar o mouse e clicar em pastas é como andar pelo mercado procurando um produto. Usar o terminal é chegar no balcão e dizer exatamente o que você quer em uma frase curta. É muito mais rápido depois que você aprende as palavras básicas.",
     },
     explicacao:
       "O terminal (ou linha de comando) é uma janela onde você digita comandos para criar pastas, navegar entre arquivos, rodar programas e usar o Git. Não precisa ter medo da tela preta: com 4 ou 5 comandos você já resolve quase tudo no começo.",
@@ -305,7 +305,7 @@ export const eli5Topics: Eli5Topic[] = [
       oQueFaz: "Permite navegar e criar pastas sem tirar as mãos do teclado.",
     },
     porQueImporta:
-      "Ferramentas modernas de programação — como Git, Node.js e instaladores de pacotes — são usadas principalmente pelo terminal.",
+      "Ferramentas modernas de programação, como Git, Node.js e instaladores de pacotes, são usadas principalmente pelo terminal.",
     check: {
       pergunta: "Qual comando do terminal lista os arquivos da pasta atual?",
       opcoes: ["ls", "mkdir", "pwd"],
