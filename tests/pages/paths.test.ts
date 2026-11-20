@@ -1,28 +1,23 @@
-import path from "node:path";
-import { unlinkSync, writeFileSync } from "node:fs";
-import { afterAll, describe, expect, it } from "vitest";
-import { generateStaticParams } from "@/app/paths/[slug]/page";
+import { describe, expect, it, vi } from "vitest";
 
-const arquivoTemporario = path.join(process.cwd(), "content/paths/slug-teste-temporario.mdx");
+const { mockGetPaths } = vi.hoisted(() => ({ mockGetPaths: vi.fn() }));
 
-writeFileSync(
-  arquivoTemporario,
-  `---
-slug: slug-teste-temporario
-titulo: Temporário
-descricao: Path criado pelo teste.
-ordem: 99
-cursos: []
----
-
-Conteúdo temporário.
-`,
-);
-
-afterAll(() => unlinkSync(arquivoTemporario));
+vi.mock("@/lib/content", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/lib/content")>();
+  return { ...actual, getPaths: mockGetPaths };
+});
 
 describe("generateStaticParams de paths", () => {
-  it("inclui paths adicionados ao conteúdo sem editar código", () => {
-    expect(generateStaticParams().map((item) => item.slug)).toContain("slug-teste-temporario");
+  it("deriva os slugs do conteúdo em vez de fixá-los no código", async () => {
+    mockGetPaths.mockReturnValue([
+      { slug: "foundations", titulo: "", descricao: "", ordem: 1, cursos: [] },
+      { slug: "slug-novo", titulo: "", descricao: "", ordem: 2, cursos: [] },
+    ]);
+
+    const { generateStaticParams } = await import("@/app/paths/[slug]/page");
+    expect(generateStaticParams().map((item) => item.slug)).toEqual([
+      "foundations",
+      "slug-novo",
+    ]);
   });
 });

@@ -32,11 +32,11 @@ export function BrandLogo({ showTagline = false, size = "md" }: BrandLogoProps) 
         </svg>
       </span>
       <span className="flex flex-col leading-none">
-        <span className={`${titleSize} font-extrabold tracking-tight text-slate-900`}>
+        <span className={`${titleSize} font-extrabold tracking-tight text-slate-900 dark:text-slate-50`}>
           Bússola
         </span>
         {showTagline && (
-          <span className="mt-0.5 text-[11px] font-semibold tracking-wide text-blue-700 uppercase">
+          <span className="mt-0.5 text-[11px] font-semibold tracking-wide text-blue-700 uppercase dark:text-blue-300">
             Open Source · 100% Gratuito
           </span>
         )}

@@ -28,9 +28,9 @@ export function SkillSlider({
 
   if (!logado) {
     return (
-      <li className="flex items-center justify-between rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm shadow-xs">
-        <span className="font-medium text-slate-800">{nome}</span>
-        <span className="font-mono text-xs text-slate-500">
+      <li className="flex items-center justify-between rounded-xl border border-slate-200/90 bg-white px-4 py-3 text-sm shadow-xs dark:border-slate-800 dark:bg-[#111827]">
+        <span className="font-medium text-slate-800 dark:text-slate-100">{nome}</span>
+        <span className="font-mono text-xs text-slate-500 dark:text-slate-400">
           nível {nivel} · meta {meta}
         </span>
       </li>
@@ -60,19 +60,19 @@ export function SkillSlider({
   }
 
   return (
-    <li className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs transition-shadow hover:shadow-sm">
+    <li className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-xs transition-shadow hover:shadow-sm dark:border-slate-800 dark:bg-[#111827]">
       <div className="flex items-center justify-between gap-2">
-        <p className="font-semibold text-slate-900">{nome}</p>
-        <span className="rounded-full bg-slate-100 px-2.5 py-0.5 font-mono text-xs font-medium text-slate-700">
+        <p className="font-semibold text-slate-900 dark:text-white">{nome}</p>
+        <span className="rounded-full bg-slate-100 px-2.5 py-0.5 font-mono text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-300">
           nível {nivel} / meta {alvo}
         </span>
       </div>
 
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
-        <label className="block text-xs font-medium text-slate-600">
+        <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">
           <span className="flex items-center justify-between">
             <span>Nível atual (conhecimento prévio)</span>
-            <span className="font-mono font-semibold text-slate-900">{baseline}</span>
+            <span className="font-mono font-semibold text-slate-900 dark:text-amber-300">{baseline}</span>
           </span>
           <input
             type="range"
@@ -87,14 +87,14 @@ export function SkillSlider({
             onKeyUp={(evento) =>
               salvar("baseline", Number((evento.target as HTMLInputElement).value))
             }
-            className="mt-1.5 h-1.5 w-full cursor-pointer accent-blue-600"
+            className="mt-1.5 h-1.5 w-full cursor-pointer accent-blue-600 dark:accent-amber-400"
           />
         </label>
 
-        <label className="block text-xs font-medium text-slate-600">
+        <label className="block text-xs font-medium text-slate-600 dark:text-slate-300">
           <span className="flex items-center justify-between">
             <span>Meta</span>
-            <span className="font-mono font-semibold text-slate-900">{alvo}</span>
+            <span className="font-mono font-semibold text-slate-900 dark:text-amber-300">{alvo}</span>
           </span>
           <input
             type="range"
