@@ -1,5 +1,12 @@
 export type Eli5Category = "base" | "web" | "ferramentas";
 
+export interface Eli5QuickCheckData {
+  pergunta: string;
+  opcoes: string[];
+  correta: number;
+  explicacao: string;
+}
+
 export interface Eli5Topic {
   slug: string;
   titulo: string;
@@ -19,6 +26,7 @@ export interface Eli5Topic {
     oQueFaz: string;
   };
   porQueImporta: string;
+  check: Eli5QuickCheckData;
 }
 
 export const eli5CategoryLabels: Record<Eli5Category, string> = {
@@ -50,6 +58,16 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Você não precisa decorar todas as linguagens. Aprender a primeira é aprender a lógica de dar instruções claras — depois, as outras ficam muito mais fáceis.",
+    check: {
+      pergunta: "Para que serve uma linguagem de programação?",
+      opcoes: [
+        "Para traduzir instruções humanas claras em comandos que o computador executa.",
+        "Para deixar o computador fisicamente mais rápido.",
+        "Para substituir o teclado e o mouse.",
+      ],
+      correta: 0,
+      explicacao: "Linguagens de programação são a ponte entre o nosso raciocínio e os 0s e 1s da máquina.",
+    },
   },
   {
     slug: "o-que-e-variavel",
@@ -73,6 +91,12 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Sem variáveis, um site não conseguiria lembrar seu nome, os itens do seu carrinho de compras ou a sua pontuação em um jogo.",
+    check: {
+      pergunta: "No exemplo acima, quanto vale a variável `pontos` no final?",
+      opcoes: ["10", "15", "5"],
+      correta: 1,
+      explicacao: "Começou com 10 e somamos 5, atualizando o valor guardado para 15.",
+    },
   },
   {
     slug: "o-que-e-funcao",
@@ -96,6 +120,16 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Funções mantêm o código organizado, evitam repetição e facilitam encontrar erros quando algo quebra.",
+    check: {
+      pergunta: "Qual é a principal vantagem de usar uma função?",
+      opcoes: [
+        "Escrever o código uma vez e reutilizar sempre que precisar.",
+        "Fazer o site funcionar sem internet.",
+        "Evitar o uso de variáveis.",
+      ],
+      correta: 0,
+      explicacao: "Funções empacotam uma tarefa reutilizável, deixando o código limpo e fácil de manter.",
+    },
   },
   {
     slug: "o-que-e-html",
@@ -119,6 +153,16 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Todo site que você já visitou na vida — do Google ao YouTube — usa HTML como base.",
+    check: {
+      pergunta: "Qual é o papel do HTML em uma página web?",
+      opcoes: [
+        "Definir as cores e animações da tela.",
+        "Definir a estrutura e o significado de cada pedaço de conteúdo.",
+        "Guardar senhas no banco de dados.",
+      ],
+      correta: 1,
+      explicacao: "HTML é o esqueleto: ele diz o que é título, parágrafo, lista, imagem ou botão.",
+    },
   },
   {
     slug: "o-que-e-css",
@@ -142,6 +186,12 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Um site só com HTML funciona, mas parece um documento de texto dos anos 90. O CSS é o que transforma páginas em produtos agradáveis de usar.",
+    check: {
+      pergunta: "Se você quiser mudar a cor de fundo de um botão, qual tecnologia usa?",
+      opcoes: ["CSS", "Git", "Terminal"],
+      correta: 0,
+      explicacao: "O CSS controla toda a aparência visual: cores, fontes, tamanhos e posicionamento.",
+    },
   },
   {
     slug: "o-que-e-javascript",
@@ -165,6 +215,16 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Junto com HTML e CSS, o JavaScript forma o trio fundamental da web moderna.",
+    check: {
+      pergunta: "O que o JavaScript adiciona a uma página que já tem HTML e CSS?",
+      opcoes: [
+        "Comportamento e interatividade (cliques, validações, atualizações na tela).",
+        "Apenas fontes diferentes.",
+        "Backup automático na nuvem.",
+      ],
+      correta: 0,
+      explicacao: "JavaScript faz a página reagir às ações da pessoa usuária em tempo real.",
+    },
   },
   {
     slug: "frontend-e-backend",
@@ -188,6 +248,12 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Ajuda você a entender onde cada tecnologia se encaixa e qual área combina mais com o que você gosta de construir.",
+    check: {
+      pergunta: "Onde normalmente fica a verificação de senha e o acesso ao banco de dados?",
+      opcoes: ["No Backend (servidor).", "No CSS.", "Apenas no título HTML."],
+      correta: 0,
+      explicacao: "Regras sensíveis e banco de dados ficam no Backend, longe do navegador do usuário.",
+    },
   },
   {
     slug: "o-que-e-git",
@@ -211,6 +277,12 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Praticamente toda equipe de tecnologia usa Git. Aprender o básico cedo evita perder código e permite trabalhar em grupo sem sobrescrever o trabalho dos outros.",
+    check: {
+      pergunta: "Qual comando salva um 'ponto no histórico' (uma foto) das suas mudanças no Git?",
+      opcoes: ["git commit", "git push", "mkdir"],
+      correta: 0,
+      explicacao: "`git commit` registra a foto no histórico local; `git push` envia essas fotos para o GitHub.",
+    },
   },
   {
     slug: "o-que-e-terminal",
@@ -234,6 +306,12 @@ export const eli5Topics: Eli5Topic[] = [
     },
     porQueImporta:
       "Ferramentas modernas de programação — como Git, Node.js e instaladores de pacotes — são usadas principalmente pelo terminal.",
+    check: {
+      pergunta: "Qual comando do terminal lista os arquivos da pasta atual?",
+      opcoes: ["ls", "mkdir", "pwd"],
+      correta: 0,
+      explicacao: "`ls` lista os arquivos, `pwd` mostra onde você está e `mkdir` cria uma pasta nova.",
+    },
   },
 ];
 
