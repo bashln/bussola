@@ -22,9 +22,9 @@ describe("StudySessionPanel", () => {
   });
 
   it("mostra URL não-YouTube como link, sem iframe", () => {
-    const recursos = [
+    const recursos: Recurso[] = [
       { tipo: "video", titulo: "Errado", url: "https://vimeo.com/123" },
-    ] as unknown as Recurso[];
+    ];
 
     render(<StudySessionPanel recursos={recursos} />);
 
