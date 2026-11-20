@@ -57,7 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 Currículo e plataforma de competências 100% gratuitos, sem paywall e open-source.
               </p>
               <p className="font-mono text-[11px] text-slate-500 dark:text-slate-400">
-                <span className="text-amber-600 dark:text-amber-400">&gt;_</span> feito com cuidado para quem aprende do
+                <span className="text-amber-800 dark:text-amber-400">&gt;_</span> feito com cuidado para quem aprende do
                 zero
               </p>
             </div>
