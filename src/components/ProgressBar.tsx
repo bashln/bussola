@@ -1,8 +1,19 @@
-export function ProgressBar({ atual, total }: { atual: number; total: number }) {
-  const percentual = total === 0 ? 0 : Math.round((atual / total) * 100);
+export function ProgressBar({
+  atual,
+  total,
+  ariaLabel = "Progresso",
+}: {
+  atual: number;
+  total: number;
+  ariaLabel?: string;
+}) {
+  const bruto = total <= 0 ? 0 : Math.round((atual / total) * 100);
+  const percentual = Math.min(100, Math.max(0, bruto));
+
   return (
     <div
       role="progressbar"
+      aria-label={ariaLabel}
       aria-valuenow={percentual}
       aria-valuemin={0}
       aria-valuemax={100}

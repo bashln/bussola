@@ -1,11 +1,25 @@
-import { MDXRemote } from "next-mdx-remote/rsc";
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { LessonCompleteButton } from "@/components/LessonCompleteButton";
-import { StudySessionPanel } from "@/components/StudySessionPanel";
+import { LessonOrProjectView } from "@/components/LessonOrProjectView";
 import { getSessionUserId } from "@/lib/auth";
-import { getLesson } from "@/lib/content";
+import { getLesson, getLessons } from "@/lib/content";
 import { listDoneLessonIds } from "@/lib/db/repositories";
-import { skills } from "@/lib/skills";
+
+export function generateStaticParams() {
+  return getLessons()
+    .filter((l) => l.tipo === "projeto")
+    .map((l) => ({ slug: l.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const projeto = getLesson(slug);
+  return { title: projeto?.titulo ?? "Projeto" };
+}
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -14,29 +28,12 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   const userId = await getSessionUserId();
   const concluidas = userId ? await listDoneLessonIds(userId) : new Set<string>();
-  const desenvolvimento = Object.keys(projeto.skillWeights)
-    .map((id) => skills.find((skill) => skill.id === id)?.nome ?? id);
 
   return (
-    <article>
-      <p className="text-sm text-gray-500">Projeto · {projeto.minutos} min</p>
-      <MDXRemote source={projeto.content} />
-
-      <section aria-label="Skills desenvolvidas" className="my-6">
-        <h2 className="text-lg font-semibold">Skills desenvolvidas</h2>
-        <ul className="mt-2 flex flex-wrap gap-2">
-          {desenvolvimento.map((nome) => (
-            <li key={nome} className="rounded-full bg-gray-100 px-3 py-1 text-sm">{nome}</li>
-          ))}
-        </ul>
-      </section>
-
-      <StudySessionPanel recursos={projeto.recursos} />
-      <LessonCompleteButton
-        lessonSlug={projeto.slug}
-        logado={Boolean(userId)}
-        concluidoInicial={concluidas.has(projeto.slug)}
-      />
-    </article>
+    <LessonOrProjectView
+      item={projeto}
+      logado={Boolean(userId)}
+      concluido={concluidas.has(projeto.slug)}
+    />
   );
 }

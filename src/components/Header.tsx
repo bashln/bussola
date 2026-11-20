@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { BrandLogo } from "@/components/BrandLogo";
 
 const links = [
+  { href: "/eli5", label: "Comece do zero" },
   { href: "/paths", label: "Trilhas" },
   { href: "/skills", label: "Minha matriz" },
   { href: "/dashboard", label: "Painel" },
@@ -29,7 +30,8 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                aria-current={isActive ? "page" : undefined}
+                className={`rounded-lg px-3 py-1.5 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
                   isActive
                     ? "bg-blue-50 text-blue-700"
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"

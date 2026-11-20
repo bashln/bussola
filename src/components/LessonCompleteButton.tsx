@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -7,9 +8,15 @@ interface Props {
   lessonSlug: string;
   logado: boolean;
   concluidoInicial: boolean;
+  hrefPrefix?: "/lessons" | "/projects";
 }
 
-export function LessonCompleteButton({ lessonSlug, logado, concluidoInicial }: Props) {
+export function LessonCompleteButton({
+  lessonSlug,
+  logado,
+  concluidoInicial,
+  hrefPrefix = "/lessons",
+}: Props) {
   const router = useRouter();
   const [concluido, setConcluido] = useState(concluidoInicial);
   const [salvando, setSalvando] = useState(false);
@@ -17,12 +24,12 @@ export function LessonCompleteButton({ lessonSlug, logado, concluidoInicial }: P
 
   if (!logado) {
     return (
-      <a
-        className="inline-flex items-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700"
-        href={`/login?callbackUrl=/lessons/${lessonSlug}`}
+      <Link
+        className="inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 sm:w-auto"
+        href={`/login?callbackUrl=${hrefPrefix}/${lessonSlug}`}
       >
         Entre para acompanhar
-      </a>
+      </Link>
     );
   }
 
@@ -53,6 +60,8 @@ export function LessonCompleteButton({ lessonSlug, logado, concluidoInicial }: P
       } else {
         setErro("Não foi possível salvar. Tente novamente.");
       }
+    } catch {
+      setErro("Erro de conexão. Verifique sua internet e tente novamente.");
     } finally {
       setSalvando(false);
     }
@@ -63,13 +72,14 @@ export function LessonCompleteButton({ lessonSlug, logado, concluidoInicial }: P
       <button
         type="button"
         disabled={salvando}
-        className="inline-flex items-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 disabled:opacity-60"
+        aria-busy={salvando}
+        className="inline-flex w-full items-center justify-center rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 disabled:opacity-60 sm:w-auto"
         onClick={marcar}
       >
         {salvando ? "Salvando..." : "Marcar como concluído"}
       </button>
       {erro && (
-        <p role="alert" className="mt-2 text-sm font-medium text-red-600">
+        <p role="alert" className="mt-2 text-sm font-medium text-rose-600">
           {erro}
         </p>
       )}

@@ -1,9 +1,20 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getCourses, getPath, getPaths } from "@/lib/content";
+import { getCourses, getLessons, getPath, getPaths } from "@/lib/content";
 
 export function generateStaticParams() {
   return getPaths().map((path) => ({ slug: path.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const path = getPath(slug);
+  return { title: path?.titulo ?? "Trilha" };
 }
 
 export default async function PathPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -12,22 +23,71 @@ export default async function PathPage({ params }: { params: Promise<{ slug: str
   if (!path) notFound();
 
   const cursos = getCourses(path.slug);
+
   return (
-    <div>
-      <h1 className="text-3xl font-bold">{path.titulo}</h1>
-      <p className="mt-2 text-gray-700">{path.descricao}</p>
-      <ol className="mt-8 space-y-4">
-        {cursos.map((curso, indice) => (
-          <li key={curso.slug} className="rounded-lg border p-5">
-            <p className="text-sm text-gray-500">Curso {indice + 1}</p>
-            <h2 className="text-xl font-semibold">{curso.titulo}</h2>
-            <p className="mt-1 text-gray-700">{curso.descricao}</p>
-            <Link className="mt-3 inline-block text-blue-700 underline" href={`/courses/${curso.slug}`}>
-              Abrir curso
-            </Link>
-          </li>
-        ))}
-      </ol>
+    <div className="space-y-8">
+      <div className="border-b border-slate-200 pb-6">
+        <Link
+          href="/paths"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 transition-colors hover:text-blue-700"
+        >
+          <span aria-hidden="true">←</span> Todas as trilhas
+        </Link>
+        <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+          {path.titulo}
+        </h1>
+        <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600">{path.descricao}</p>
+      </div>
+
+      {cursos.length === 0 ? (
+        <div className="rounded-2xl border border-slate-200/90 bg-white p-8 text-center shadow-xs">
+          <p className="text-sm text-slate-600">Nenhum curso disponível nesta trilha ainda.</p>
+          <Link
+            href="/paths"
+            className="mt-4 inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-blue-700"
+          >
+            Explorar outras trilhas
+          </Link>
+        </div>
+      ) : (
+        <ol className="grid gap-4 sm:grid-cols-2">
+          {cursos.map((curso, indice) => {
+            const licoes = getLessons({ curso: curso.slug });
+            const totalMinutos = licoes.reduce((acc, l) => acc + l.minutos, 0);
+
+            return (
+              <li key={curso.slug}>
+                <Link
+                  href={`/courses/${curso.slug}`}
+                  className="group flex h-full flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs transition-all hover:-translate-y-0.5 hover:border-blue-300 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="inline-flex items-center rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-700">
+                        Curso {indice + 1}
+                      </span>
+                      <span className="text-xs font-medium text-slate-500">
+                        {licoes.length} {licoes.length === 1 ? "lição" : "lições"} · {totalMinutos} min
+                      </span>
+                    </div>
+                    <h2 className="mt-3 text-xl font-bold text-slate-900 transition-colors group-hover:text-blue-700">
+                      {curso.titulo}
+                    </h2>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">{curso.descricao}</p>
+                  </div>
+
+                  <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-blue-600">
+                    <span>Abrir curso</span>
+                    <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">
+                      →
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+      )}
     </div>
   );
 }

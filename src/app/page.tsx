@@ -61,6 +61,12 @@ export default function Home() {
               <span aria-hidden="true">→</span>
             </Link>
             <Link
+              href="/eli5"
+              className="inline-flex items-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-5 py-3 text-sm font-semibold text-amber-900 shadow-xs transition-colors hover:border-amber-400 hover:bg-amber-100"
+            >
+              Nunca programou? Modo ELI5
+            </Link>
+            <Link
               href="/skills"
               className="inline-flex items-center rounded-xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 shadow-xs transition-colors hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
             >

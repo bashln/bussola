@@ -38,8 +38,11 @@ export default async function SkillsPage() {
 
       <div className="grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <div className="sticky top-24 rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs">
-            <h2 className="mb-4 text-lg font-bold text-slate-900">Radar de competências</h2>
+          <div className="rounded-2xl border border-slate-200/90 bg-white p-6 shadow-xs lg:sticky lg:top-24">
+            <h2 className="text-lg font-bold text-slate-900">Radar de competências</h2>
+            <p className="mb-4 mt-1 text-xs text-slate-500">
+              Escala de 0 a 5 combinando seu conhecimento prévio e lições concluídas.
+            </p>
             <SkillRadar dados={niveis} />
           </div>
         </div>
