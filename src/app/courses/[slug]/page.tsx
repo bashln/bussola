@@ -35,8 +35,8 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
 
   return (
     <div className="space-y-8">
-      <div className="border-b border-slate-200 pb-6">
-        <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500">
+      <div className="border-b border-slate-200 pb-6 dark:border-slate-800">
+        <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
           <Link href="/paths" className="font-medium transition-colors hover:text-blue-700">
             Trilhas
           </Link>
@@ -53,16 +53,16 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
           )}
         </div>
 
-        <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
           {curso.titulo}
         </h1>
-        <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600">{curso.descricao}</p>
+        <p className="mt-2 max-w-2xl text-base leading-relaxed text-slate-600 dark:text-slate-300">{curso.descricao}</p>
       </div>
 
-      <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs">
+      <div className="rounded-2xl border border-slate-200/90 bg-white p-5 shadow-xs dark:border-slate-800 dark:bg-[#111827]">
         <div className="mb-2.5 flex items-center justify-between text-sm">
-          <span className="font-semibold text-slate-900">Progresso do curso</span>
-          <span className="font-medium text-slate-600">
+          <span className="font-semibold text-slate-900 dark:text-white">Progresso do curso</span>
+          <span className="font-medium text-slate-600 dark:text-slate-300">
             {feitas} de {total} concluídas ({percentual}%)
           </span>
         </div>
@@ -70,8 +70,8 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
       </div>
 
       {licoes.length === 0 ? (
-        <div className="rounded-2xl border border-slate-200/90 bg-white p-8 text-center shadow-xs">
-          <p className="text-sm text-slate-600">Nenhuma lição cadastrada neste curso ainda.</p>
+        <div className="rounded-2xl border border-slate-200/90 bg-white p-8 text-center shadow-xs dark:border-slate-800 dark:bg-[#111827]">
+          <p className="text-sm text-slate-600 dark:text-slate-300">Nenhuma lição cadastrada neste curso ainda.</p>
         </div>
       ) : (
         <ol className="space-y-3">
@@ -84,36 +84,38 @@ export default async function CoursePage({ params }: { params: Promise<{ slug: s
               <li key={licao.slug}>
                 <Link
                   href={href}
-                  className={`group flex items-center justify-between gap-4 rounded-2xl border bg-white p-5 shadow-xs transition-all hover:border-blue-300 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 ${
-                    concluida ? "border-emerald-200/90" : "border-slate-200/90"
+                  className={`group flex items-center justify-between gap-4 rounded-2xl border bg-white p-5 shadow-xs transition-all hover:border-blue-300 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 dark:bg-[#111827] dark:hover:border-amber-400/50 ${
+                    concluida
+                      ? "border-emerald-200/90 dark:border-emerald-500/40"
+                      : "border-slate-200/90 dark:border-slate-800"
                   }`}
                 >
                   <div className="flex min-w-0 items-start gap-4">
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
                         concluida
-                          ? "bg-emerald-100 text-emerald-700"
-                          : "bg-slate-100 text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-700"
+                          ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300"
+                          : "bg-slate-100 text-slate-600 group-hover:bg-blue-50 group-hover:text-blue-700 dark:bg-slate-800 dark:text-slate-300 dark:group-hover:bg-amber-400/15 dark:group-hover:text-amber-300"
                       }`}
                     >
                       {concluida ? "✓" : indice + 1}
                     </span>
 
                     <div className="min-w-0">
-                      <h2 className="font-semibold text-slate-900 transition-colors group-hover:text-blue-700">
+                      <h2 className="font-semibold text-slate-900 transition-colors group-hover:text-blue-700 dark:text-white dark:group-hover:text-amber-300">
                         {licao.titulo}
                       </h2>
                       <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs">
                         <span
                           className={`rounded-full px-2 py-0.5 font-semibold ${
                             isProjeto
-                              ? "bg-amber-50 text-amber-800"
-                              : "bg-blue-50 text-blue-700"
+                              ? "bg-amber-50 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300"
+                              : "bg-blue-50 text-blue-700 dark:bg-blue-500/15 dark:text-blue-300"
                           }`}
                         >
                           {isProjeto ? "Projeto" : "Leitura"}
                         </span>
-                        <span className="text-slate-500">{licao.minutos} min</span>
+                        <span className="text-slate-500 dark:text-slate-400">{licao.minutos} min</span>
                         {concluida && (
                           <span className="font-semibold text-emerald-700">· Concluído</span>
                         )}

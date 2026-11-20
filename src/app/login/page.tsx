@@ -18,16 +18,16 @@ export default async function LoginPage({
       : "/dashboard";
 
   return (
-    <div className="mx-auto my-8 max-w-md rounded-2xl border border-slate-200/90 bg-white p-8 shadow-xs">
-      <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">Entrar no Bússola</h1>
-      <p className="mt-2 text-sm leading-relaxed text-slate-600">
+    <div className="mx-auto my-8 max-w-md rounded-2xl border border-slate-200/90 bg-white p-8 shadow-xs dark:border-slate-800 dark:bg-[#111827]">
+      <h1 className="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white">Entrar no Bússola</h1>
+      <p className="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">
         Use sua conta do GitHub para salvar seu progresso, níveis e metas de competência.
       </p>
 
       {error && (
         <div
           role="alert"
-          className="mt-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800"
+          className="mt-4 rounded-xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-800 dark:border-rose-500/30 dark:bg-rose-950/30 dark:text-rose-200"
         >
           Não foi possível concluir o login ({error}). Tente novamente.
         </div>
@@ -42,7 +42,7 @@ export default async function LoginPage({
       >
         <button
           type="submit"
-          className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900"
+          className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-xs transition-colors hover:bg-slate-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900 dark:bg-amber-400 dark:text-slate-950 dark:hover:bg-amber-300"
         >
           <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path
