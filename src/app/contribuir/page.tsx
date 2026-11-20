@@ -1,27 +1,30 @@
 export const metadata = { title: "Contribuir" };
 
+const codeClass =
+  "rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[0.9em] text-slate-800 dark:bg-slate-800 dark:text-slate-200";
+
 export default function ContribuirPage() {
   return (
     <div className="max-w-2xl">
-      <h1 className="text-3xl font-bold">Contribuir</h1>
-      <p className="mt-3 text-gray-700">
-        Todo o conteúdo fica em <code>content/</code> e é versionado. Para adicionar uma lição ou
+      <h1 className="text-3xl font-bold dark:text-white">Contribuir</h1>
+      <p className="mt-3 text-gray-700 dark:text-slate-300">
+        Todo o conteúdo fica em <code className={codeClass}>content/</code> e é versionado. Para adicionar uma lição ou
         corrigir um texto, abra um pull request.
       </p>
 
-      <h2 className="mt-8 text-xl font-semibold">Como adicionar uma lição</h2>
-      <ol className="mt-3 list-decimal space-y-2 pl-5 text-gray-700">
-        <li>Copie um arquivo de <code>content/lessons/</code> como modelo.</li>
-        <li>Preencha o frontmatter: <code>slug</code>, <code>curso</code>, <code>titulo</code>,
-          <code>tipo</code>, <code>ordem</code>, <code>minutos</code>, <code>skillWeights</code>,
-          <code>prereqs</code> e <code>recursos</code>.</li>
+      <h2 className="mt-8 text-xl font-semibold dark:text-white">Como adicionar uma lição</h2>
+      <ol className="mt-3 list-decimal space-y-2 pl-5 text-gray-700 dark:text-slate-300">
+        <li>Copie um arquivo de <code className={codeClass}>content/lessons/</code> como modelo.</li>
+        <li>Preencha o frontmatter: <code className={codeClass}>slug</code>, <code className={codeClass}>curso</code>, <code className={codeClass}>titulo</code>,
+          <code className={codeClass}>tipo</code>, <code className={codeClass}>ordem</code>, <code className={codeClass}>minutos</code>, <code className={codeClass}>skillWeights</code>,
+          <code className={codeClass}>prereqs</code> e <code className={codeClass}>recursos</code>.</li>
         <li>Escreva o conteúdo em português, abaixo do frontmatter.</li>
-        <li>Em <code>recursos</code>, use vídeos do YouTube e links de documentação oficial.</li>
-        <li>Rode <code>npm run test</code> e abra o PR.</li>
+        <li>Em <code className={codeClass}>recursos</code>, use vídeos do YouTube e links de documentação oficial.</li>
+        <li>Rode <code className={codeClass}>npm run test</code> e abra o PR.</li>
       </ol>
 
-      <h2 id="apoiar" className="mt-8 text-xl font-semibold">Apoiar financeiramente</h2>
-      <p className="mt-2 text-gray-700">
+      <h2 id="apoiar" className="mt-8 text-xl font-semibold dark:text-white">Apoiar financeiramente</h2>
+      <p className="mt-2 text-gray-700 dark:text-slate-300">
         O Bússola é 100% gratuito, sem anúncios e sem venda de dados. Se o projeto te ajudou e
         você quiser contribuir financeiramente para mantê-lo no ar, escolha uma das opções abaixo:
       </p>
@@ -44,8 +47,8 @@ export default function ContribuirPage() {
         </a>
       </div>
 
-      <h2 className="mt-8 text-xl font-semibold">Licença</h2>
-      <p className="mt-2 text-gray-700">Código sob MIT; conteúdo sob CC BY-SA 4.0.</p>
+      <h2 className="mt-8 text-xl font-semibold dark:text-white">Licença</h2>
+      <p className="mt-2 text-gray-700 dark:text-slate-300">Código sob MIT; conteúdo sob CC BY-SA 4.0.</p>
     </div>
   );
 }
