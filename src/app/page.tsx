@@ -79,7 +79,7 @@ export default function Home() {
                     Nunca programei
                   </h2>
                   <p className="mt-1.5 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
-                    Comece pelo básico do básico: o que é HTML, CSS, Git, função e terminal — com
+                    Comece pelo básico do básico: o que é HTML, CSS, Git, função e terminal, com
                     analogias simples e zero jargão.
                   </p>
                 </div>
@@ -175,9 +175,8 @@ export default function Home() {
               Educação técnica aberta, gratuita e transparente
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-slate-300 sm:text-base">
-              Assim como grandes projetos open-source da comunidade, a Bússola existe para dar
-              direção clara a quem estuda por conta própria: todo o conteúdo, código e matriz de
-              habilidades são abertos para você usar, estudar e contribuir.
+              A Bússola é aberta para quem estuda por conta própria: conteúdo, código e matriz de
+              habilidades disponíveis para usar, estudar e contribuir.
             </p>
           </div>
           <div className="shrink-0">
@@ -206,7 +205,8 @@ export default function Home() {
             href="/skills"
             className="text-sm font-semibold text-blue-700 transition-colors hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
           >
-            Explorar todas as {skills.length} competências →
+            Explorar todas as {skills.length} competências{" "}
+            <span aria-hidden="true">→</span>
           </Link>
         </div>
 

@@ -17,6 +17,8 @@ const links = [
 export function Header() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const isActive = (href: string) =>
+    pathname === href || (href !== "/" && Boolean(pathname?.startsWith(`${href}/`)));
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -40,15 +42,13 @@ export function Header() {
           className="hidden items-center gap-1 md:flex"
         >
           {links.map((link) => {
-            const isActive =
-              pathname === link.href ||
-              (link.href !== "/" && pathname?.startsWith(`${link.href}/`));
+            const active = isActive(link.href);
             return (
               <Link
                 key={link.href}
                 href={link.href}
                 className={`relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors duration-150 ${
-                  isActive
+                  active
                     ? "bg-slate-900 text-white dark:bg-amber-400 dark:text-slate-950"
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-slate-800/80 dark:hover:text-white"
                 }`}
@@ -104,16 +104,14 @@ export function Header() {
             className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4 sm:px-6"
           >
             {links.map((link) => {
-              const isActive =
-                pathname === link.href ||
-                (link.href !== "/" && pathname?.startsWith(`${link.href}/`));
+              const active = isActive(link.href);
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center justify-between rounded-lg px-3.5 py-2.5 text-sm font-semibold transition-all duration-150 ${
-                    isActive
+                    active
                       ? "border border-slate-900 bg-slate-900 text-white dark:border-amber-400 dark:bg-amber-400 dark:text-slate-950"
                       : "border border-transparent text-slate-700 hover:border-slate-200 hover:bg-white dark:text-slate-200 dark:hover:border-slate-800 dark:hover:bg-slate-900"
                   }`}
@@ -121,7 +119,7 @@ export function Header() {
                   <span>{link.label}</span>
                   <span
                     className={`font-mono text-xs ${
-                      isActive
+                      active
                         ? "text-amber-300 dark:text-slate-900"
                         : "text-slate-500 dark:text-slate-400"
                     }`}

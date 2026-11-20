@@ -7,14 +7,22 @@ import type { CourseMeta, Lesson, LessonMeta, PathMeta } from "./types";
 
 const root = process.cwd();
 
-function readCollection(directory: string) {
+function readFrontmatter(file: string) {
+  try {
+    return matter(readFileSync(file, "utf8"));
+  } catch (error) {
+    throw new Error(`Falha ao ler ${path.relative(root, file)}: ${String(error)}`);
+  }
+}
+
+function readCollection<T>(directory: string, parse: (data: unknown) => T): T[] {
   const files = fg.sync(`content/${directory}/*.mdx`, { cwd: root, absolute: true });
   return files.map((file) => {
+    const { data } = readFrontmatter(file);
     try {
-      const parsed = matter(readFileSync(file, "utf8"));
-      return { ...parsed, file };
+      return parse(data);
     } catch (error) {
-      throw new Error(`Falha ao ler ${path.relative(root, file)}: ${String(error)}`);
+      throw new Error(`Frontmatter inválido em ${path.relative(root, file)}: ${String(error)}`);
     }
   });
 }
@@ -24,13 +32,7 @@ function byOrdem<T extends { ordem: number; slug: string }>(a: T, b: T) {
 }
 
 export function getPaths(): PathMeta[] {
-  return readCollection("paths").map(({ data, file }) => {
-    try {
-      return parsePath(data);
-    } catch (error) {
-      throw new Error(`Frontmatter inválido em ${path.relative(root, file)}: ${String(error)}`);
-    }
-  }).sort(byOrdem);
+  return readCollection("paths", parsePath).sort(byOrdem);
 }
 
 export function getPath(slug: string): PathMeta | null {
@@ -38,14 +40,7 @@ export function getPath(slug: string): PathMeta | null {
 }
 
 export function getCourses(pathSlug?: string): CourseMeta[] {
-  return readCollection("courses")
-    .map(({ data, file }) => {
-      try {
-        return parseCourse(data) as CourseMeta;
-      } catch (error) {
-        throw new Error(`Frontmatter inválido em ${path.relative(root, file)}: ${String(error)}`);
-      }
-    })
+  return readCollection("courses", parseCourse)
     .filter((item) => (pathSlug ? item.path === pathSlug : true))
     .sort(byOrdem);
 }
@@ -55,24 +50,22 @@ export function getCourse(slug: string): CourseMeta | null {
 }
 
 export function getLessons(filter?: { curso?: string; tipo?: LessonMeta["tipo"] }): LessonMeta[] {
-  return readCollection("lessons")
-    .map(({ data, file }) => {
-      try {
-        return parseLessonFrontmatter(data);
-      } catch (error) {
-        throw new Error(`Frontmatter inválido em ${path.relative(root, file)}: ${String(error)}`);
-      }
-    })
+  return readCollection("lessons", parseLessonFrontmatter)
     .filter((item) => (filter?.curso ? item.curso === filter.curso : true))
     .filter((item) => (filter?.tipo ? item.tipo === filter.tipo : true))
     .sort(byOrdem);
 }
 
 export function getLesson(slug: string): Lesson | null {
-  const file = fg.sync(`content/lessons/*.mdx`, { cwd: root, absolute: true }).find((candidate) =>
-    matter(readFileSync(candidate, "utf8")).data.slug === slug,
-  );
-  if (!file) return null;
-  const parsed = matter(readFileSync(file, "utf8"));
-  return { ...parseLessonFrontmatter(parsed.data), content: parsed.content };
+  const files = fg.sync(`content/lessons/*.mdx`, { cwd: root, absolute: true });
+  for (const file of files) {
+    const parsed = readFrontmatter(file);
+    if (parsed.data.slug !== slug) continue;
+    try {
+      return { ...parseLessonFrontmatter(parsed.data), content: parsed.content };
+    } catch (error) {
+      throw new Error(`Frontmatter inválido em ${path.relative(root, file)}: ${String(error)}`);
+    }
+  }
+  return null;
 }

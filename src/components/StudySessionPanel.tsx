@@ -9,8 +9,12 @@ export function StudySessionPanel({ recursos }: { recursos: Recurso[] }) {
 
   if (recursos.length === 0) return null;
 
-  const videos = recursos.filter((recurso) => recurso.tipo === "video");
-  const docs = recursos.filter((recurso) => recurso.tipo === "doc");
+  const videos = recursos.filter(
+    (recurso): recurso is Extract<Recurso, { tipo: "video" }> => recurso.tipo === "video",
+  );
+  const docs = recursos.filter(
+    (recurso): recurso is Extract<Recurso, { tipo: "doc" }> => recurso.tipo === "doc",
+  );
 
   return (
     <section
@@ -28,7 +32,6 @@ export function StudySessionPanel({ recursos }: { recursos: Recurso[] }) {
           </h3>
           <ul className="space-y-4">
             {videos.map((video) => {
-              if (video.tipo !== "video") return null;
               const id = youtubeId(video.url);
               return (
                 <li
@@ -82,25 +85,22 @@ export function StudySessionPanel({ recursos }: { recursos: Recurso[] }) {
             Documentação
           </h3>
           <ul className="space-y-2.5">
-            {docs.map((doc) => {
-              if (doc.tipo !== "doc") return null;
-              return (
-                <li
-                  key={doc.url}
-                  className="rounded-xl border border-slate-200 bg-slate-50/70 p-3.5 dark:border-slate-700 dark:bg-slate-900/70"
+            {docs.map((doc) => (
+              <li
+                key={doc.url}
+                className="rounded-xl border border-slate-200 bg-slate-50/70 p-3.5 dark:border-slate-700 dark:bg-slate-900/70"
+              >
+                <a
+                  className="font-medium text-blue-600 underline underline-offset-2 hover:text-blue-700 dark:text-amber-400 dark:hover:text-amber-300"
+                  href={doc.ancora ? `${doc.url}${doc.ancora}` : doc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  <a
-                    className="font-medium text-blue-600 underline underline-offset-2 hover:text-blue-700 dark:text-amber-400 dark:hover:text-amber-300"
-                    href={doc.ancora ? `${doc.url}${doc.ancora}` : doc.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {doc.titulo}
-                  </a>
-                  {doc.resumo && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{doc.resumo}</p>}
-                </li>
-              );
-            })}
+                  {doc.titulo}
+                </a>
+                {doc.resumo && <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{doc.resumo}</p>}
+              </li>
+            ))}
           </ul>
         </div>
       )}

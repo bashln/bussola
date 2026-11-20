@@ -7,8 +7,8 @@ import { skills } from "@/lib/skills";
 
 afterEach(cleanup);
 
-describe("Home page visual hierarchy and navigation", () => {
-  it("renders filled primary CTAs on entry cards and demotes Como contribuir to secondary", () => {
+describe("Hierarquia visual e navegação da home", () => {
+  it("mantém CTAs preenchidos nos cards de entrada e rebaixa Como contribuir para secundário", () => {
     render(<Home />);
 
     const eli5Card = screen.getByRole("link", { name: /Nunca programei/i });
@@ -21,7 +21,7 @@ describe("Home page visual hierarchy and navigation", () => {
     expect(contribuirLink.className).toContain("border");
   });
 
-  it("links every skill pill and the overflow pill to /skills", () => {
+  it("liga cada pill de skill e o pill de excedente para /skills", () => {
     render(<Home />);
 
     for (const skill of skills.slice(0, 10)) {
@@ -35,7 +35,7 @@ describe("Home page visual hierarchy and navigation", () => {
     expect(overflowLink).toHaveAttribute("href", "/skills");
   });
 
-  it("keeps the top badge on one line and the matrix link arrow inline", () => {
+  it("mantém o selo do topo em uma linha e a seta do link da matriz inline", () => {
     render(<Home />);
 
     const badge = screen.getByText(/100% gratuito · Sem paywall · Open Source/i);
